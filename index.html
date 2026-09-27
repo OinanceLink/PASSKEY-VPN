@@ -1,1 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050505">
+  <title>PASSKEY-VPN</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
+<body>
+
+  <div class="app">
+
+    <!-- LOGIN SCREEN -->
+    <section id="loginScreen" class="screen active">
+      <div class="logo">
+        <div class="logo-mark">P</div>
+        <h1>PASSKEY<span>-VPN</span></h1>
+      </div>
+
+      <p class="tagline">Private. Secure. Connected.</p>
+
+      <div class="form-card">
+        <h2>Welcome back</h2>
+        <p>Sign in to your PASSKEY-VPN account.</p>
+
+        <input type="email" id="loginEmail" placeholder="Email address">
+        <input type="password" id="loginPassword" placeholder="Password">
+
+        <button class="primary-btn" onclick="login()">LOG IN</button>
+
+        <p class="switch-text">
+          Don't have an account?
+          <button class="text-btn" onclick="showScreen('signupScreen')">
+            Create account
+          </button>
+        </p>
+      </div>
+    </section>
+
+
+    <!-- SIGN UP SCREEN -->
+    <section id="signupScreen" class="screen">
+      <div class="top-logo">
+        PASSKEY<span>-VPN</span>
+      </div>
+
+      <div class="form-card">
+        <h2>Create account</h2>
+        <p>Join PASSKEY-VPN and protect your connection.</p>
+
+        <input type="text" id="signupName" placeholder="Full name">
+        <input type="email" id="signupEmail" placeholder="Email address">
+        <input type="password" id="signupPassword" placeholder="Create password">
+
+        <button class="primary-btn" onclick="signup()">CREATE ACCOUNT</button>
+
+        <p class="switch-text">
+          Already have an account?
+          <button class="text-btn" onclick="showScreen('loginScreen')">
+            Log in
+          </button>
+        </p>
+      </div>
+    </section>
+
+
+    <!-- HOME SCREEN -->
+    <section id="homeScreen" class="screen">
+
+      <header class="app-header">
+        <div>
+          <div class="brand">PASSKEY<span>-VPN</span></div>
+          <small id="welcomeUser">Welcome</small>
+        </div>
+
+        <button class="icon-btn" onclick="showScreen('accountScreen')">
+          ◉
+        </button>
+      </header>
+
+      <div class="connection-card">
+
+        <div id="connectionStatus" class="status">
+          ● NOT CONNECTED
+        </div>
+
+        <div class="connect-ring">
+          <button id="connectButton" onclick="toggleVPN()">
+            CONNECT
+          </button>
+        </div>
+
+        <p id="connectionMessage">
+          Your connection is not protected.
+        </p>
+
+      </div>
+
+
+      <div class="server-card" onclick="showScreen('locationsScreen')">
+        <div class="server-left">
+          <span class="flag">🇺🇸</span>
+
+          <div>
+            <small>VPN LOCATION</small>
+            <strong id="selectedCountry">United States</strong>
+            <span id="selectedCity">New York</span>
+          </div>
+        </div>
+
+        <span class="arrow">›</span>
+      </div>
+
+
+      <div class="security-card">
+        <div class="security-icon">✓</div>
+
+        <div>
+          <strong>Security Status</strong>
+          <p id="securityText">Waiting for connection</p>
+        </div>
+      </div>
+
+
+      <nav class="bottom-nav">
+
+        <button class="nav-item active">
+          <span>⌂</span>
+          <small>Home</small>
+        </button>
+
+        <button class="nav-item" onclick="showScreen('locationsScreen')">
+          <span>◎</span>
+          <small>Locations</small>
+        </button>
+
+        <button class="nav-item" onclick="showScreen('subscriptionScreen')">
+          <span>◆</span>
+          <small>Plan</small>
+        </button>
+
+        <button class="nav-item" onclick="showScreen('accountScreen')">
+          <span>◉</span>
+          <small>Account</small>
+        </button>
+
+      </nav>
+
+    </section>
+
+
+    <!-- LOCATIONS SCREEN -->
+    <section id="locationsScreen" class="screen">
+
+      <header class="page-header">
+        <button class="back-btn" onclick="showScreen('homeScreen')">‹</button>
+        <h2>VPN Locations</h2>
+      </header>
+
+      <p class="page-description">
+        Choose a PASSKEY-VPN server location.
+      </p>
+
+      <div class="location-list">
+
+        <button class="location" onclick="selectLocation('🇺🇸','United States','New York')">
+          <span>🇺🇸</span>
+          <div>
+            <strong>United States</strong>
+            <small>New York</small>
+          </div>
+          <b>›</b>
+        </button>
+
+        <button class="location" onclick="selectLocation('🇬🇧','United Kingdom','London')">
+          <span>🇬🇧</span>
+          <div>
+            <strong>United Kingdom</strong>
+            <small>London</small>
+          </div>
+          <b>›</b>
+        </button>
+
+        <button class="location" onclick="selectLocation('🇨🇦','Canada','Toronto')">
+          <span>🇨🇦</span>
+          <div>
+            <strong>Canada</strong>
+            <small>Toronto</small>
+          </div>
+          <b>›</b>
+        </button>
+
+        <button class="location" onclick="selectLocation('🇦🇺','Australia','Sydney')">
+          <span>🇦🇺</span>
+          <div>
+            <strong>Australia</strong>
+            <small>Sydney</small>
+          </div>
+          <b>›</b>
+        </button>
+
+        <button class="location" onclick="selectLocation('🇩🇪','Germany','Frankfurt')">
+          <span>🇩🇪</span>
+          <div>
+            <strong>Germany</strong>
+            <small>Frankfurt</small>
+          </div>
+          <b>›</b>
+        </button>
+
+        <button class="location" onclick="selectLocation('🇵🇹','Portugal','Lisbon')">
+          <span>🇵🇹</span>
+          <div>
+            <strong>Portugal</strong>
+            <small>Lisbon</small>
+          </div>
+          <b>›</b>
+        </button>
+
+        <button class="location" onclick="selectLocation('🇵🇱','Poland','Warsaw')">
+          <span>🇵🇱</span>
+          <div>
+            <strong>Poland</strong>
+            <small>Warsaw</small>
+          </div>
+          <b>›</b>
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- SUBSCRIPTION SCREEN -->
+    <section id="subscriptionScreen" class="screen">
+
+      <header class="page-header">
+        <button class="back-btn" onclick="showScreen('homeScreen')">‹</button>
+        <h2>Your Plan</h2>
+      </header>
+
+      <div class="premium-card">
+
+        <div class="premium-label">PASSKEY-VPN PREMIUM</div>
+
+        <h2>Secure your connection.</h2>
+
+        <p>
+          Access all PASSKEY-VPN locations with an active subscription.
+        </p>
+
+        <div class="price">
+          <strong>$9.99</strong>
+          <span>/ month</span>
+        </div>
+
+        <button class="primary-btn" onclick="subscribe()">
+          SUBSCRIBE NOW
+        </button>
+
+      </div>
+
+      <div class="feature-list">
+        <p>✓ All 7 VPN countries</p>
+        <p>✓ Secure VPN connection</p>
+        <p>✓ Multiple server locations</p>
+        <p>✓ Automatic reconnection</p>
+        <p>✓ Kill-switch protection</p>
+      </div>
+
+    </section>
+
+
+    <!-- ACCOUNT SCREEN -->
+    <section id="accountScreen" class="screen">
+
+      <header class="page-header">
+        <button class="back-btn" onclick="showScreen('homeScreen')">‹</button>
+        <h2>Account</h2>
+      </header>
+
+      <div class="profile-card">
+        <div class="profile-icon">P</div>
+
+        <div>
+          <strong id="accountName">PASSKEY User</strong>
+          <small id="accountEmail">user@example.com</small>
+        </div>
+      </div>
+
+      <div class="account-option">
+        <span>Subscription</span>
+        <strong id="accountPlan">No active plan</strong>
+      </div>
+
+      <div class="account-option">
+        <span>Security</span>
+        <strong>Protected</strong>
+      </div>
+
+      <button class="logout-btn" onclick="logout()">
+        LOG OUT
+      </button>
+
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
